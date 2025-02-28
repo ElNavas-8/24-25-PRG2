@@ -3,24 +3,24 @@ package entregas;
 class Calc {
     private double[] numbers;
     private int actualPosition;
+    private boolean error;
+    private String errorMensaje; 
 
     public static void main(String[] args) {
         
         Calc calculator = new Calc();
 
-        calculator.inputNumber(1);
-        calculator.inputNumber(25);
         calculator.inputNumber(45);
-        System.out.println(calculator.showAll());
+        calculator.sum();
+        System.out.println(calculator.show());
 
-        calculator.clean();
-        calculator.inputNumber(8);
-        System.out.println(calculator.showAll());
     }  
 
     public Calc() {
         numbers = new double[10];
         actualPosition = 0;
+        error = false;
+        errorMensaje = "";
     };
     
     public void inputNumber(double value){
@@ -29,28 +29,55 @@ class Calc {
     }
 
     public String show (){
-        return "" + numbers[actualPosition-1];
+        if (error){
+            return errorMensaje;
+        } else{
+        return "" + numbers[actualPosition-1];}
     }
 
     public String showAll (){
-        String result = "";
-        for(int i=0; i<actualPosition; i++){
-            result = result + numbers[i] + "\n";
+        if (error){
+            return errorMensaje;
+        } else{
+            String result = "";
+            for(int i=0; i<actualPosition; i++){
+                result = result + numbers[i] + "\n";
+            }
+            return result;
         }
-        return result;
     }
 
     public void clean (){
         numbers = new double[numbers.length];
         actualPosition = 0;
+        error = !error;
+        errorMensaje = "";
     }
 
     public void sum(){
-        operationSum = actualPosition - (actualPosition-1);
-        return operationSum;
+        if (actualPosition >= 2){
+            double result = numbers[actualPosition-1] + numbers[actualPosition-2];
+            numbers[actualPosition-2] = result;
+            actualPosition = actualPosition-1;
+        }
+        else{
+            error = true;
+            errorMensaje = "Missing Operators";
+        }
     };
 
-    // public void minus(){};
+    public void minus(){
+        if (actualPosition >= 2){
+            double result = numbers[actualPosition-2] - numbers[actualPosition-1];
+            numbers[actualPosition-2] = result;
+            actualPosition = actualPosition-1;
+        }
+        else{
+            error = true;
+            errorMensaje = "Missing Operators";
+        }
+    };
+
     // public void divide(){};
     // public void multiply(){};
 
