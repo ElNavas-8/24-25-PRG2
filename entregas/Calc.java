@@ -1,46 +1,74 @@
 package entregas;
-import java.util.Scanner;
 
 class Calc {
+    private double[] numbers;
+    private int actualPosition;
+
     public static void main(String[] args) {
         
-    }
+        Calc calculator = new Calc();
+
+        calculator.inputNumber(1);
+        calculator.inputNumber(25);
+        calculator.inputNumber(45);
+        System.out.println(calculator.showAll());
+
+        calculator.clean();
+        calculator.inputNumber(8);
+        System.out.println(calculator.showAll());
+    }  
+
+    public Calc() {
+        numbers = new double[10];
+        actualPosition = 0;
+    };
     
-    public Calculator(){};
-
-    public void connect(){};
-
-    public void userInput(){
-        Scanner scanner = new Scanner(System.in);
-        double number = scanner.nextDouble();
-        return number;
+    public void inputNumber(double value){
+        numbers[actualPosition] = value;
+        actualPosition++;
     }
 
-    public void cleanMemory(){};
-    public void cleanLast(){};
+    public String show (){
+        return "" + numbers[actualPosition-1];
+    }
 
-    public void display(){};
+    public String showAll (){
+        String result = "";
+        for(int i=0; i<actualPosition; i++){
+            result = result + numbers[i] + "\n";
+        }
+        return result;
+    }
 
-    public void sum(){};
-    public void minus(){};
-    public void divide(){};
-    public void multiply(){};
+    public void clean (){
+        numbers = new double[numbers.length];
+        actualPosition = 0;
+    }
 
-    public void changeOperator(){};
+    public void sum(){
+        operationSum = actualPosition - (actualPosition-1);
+        return operationSum;
+    };
 
-    public void power(){};
-    public void toThePowerOf(){};
-    public void squareRoot(){};
-    public void logarithm(){};
+    // public void minus(){};
+    // public void divide(){};
+    // public void multiply(){};
 
-    public void sen(){};
-    public void cos(){};
-    public void tan(){};
-    public void cotan(){};
-    public void sec(){};
-    public void cosec(){};
+    // public void changeOperator(){};
 
-    public void alternateAngleMode(){};
-    public void alternateNumberFormat(){};
+    // public void power(){};
+    // public void toThePowerOf(){};
+    // public void squareRoot(){};
+    // public void logarithm(){};
+
+    // public void sen(){};
+    // public void cos(){};
+    // public void tan(){};
+    // public void cotan(){};
+    // public void sec(){};
+    // public void cosec(){};
+
+    // public void alternateAngleMode(){};
+    // public void alternateNumberFormat(){};
 
 };
