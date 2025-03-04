@@ -10,9 +10,22 @@ class Calc {
         
         Calc calculator = new Calc();
 
-        calculator.inputNumber(45);
+        calculator.inputNumber(9);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
+        calculator.inputNumber(5);
         calculator.sum();
-        System.out.println(calculator.show());
+        System.out.println(calculator.showAll());
 
     }  
 
@@ -24,8 +37,13 @@ class Calc {
     };
     
     public void inputNumber(double value){
-        numbers[actualPosition] = value;
-        actualPosition++;
+        if (actualPosition<numbers.length){
+            numbers[actualPosition] = value;
+            actualPosition++;
+        } else{
+            error = true;
+            errorMensaje = "Memory FULL";
+        }
     }
 
     public String show (){
@@ -56,7 +74,7 @@ class Calc {
 
     public void sum(){
         if (actualPosition >= 2){
-            double result = numbers[actualPosition-1] + numbers[actualPosition-2];
+            double result = numbers[actualPosition-2] + numbers[actualPosition-1];
             numbers[actualPosition-2] = result;
             actualPosition = actualPosition-1;
         }
@@ -78,8 +96,29 @@ class Calc {
         }
     };
 
-    // public void divide(){};
-    // public void multiply(){};
+    public void divide(){
+        if (actualPosition >= 2){
+            double result = numbers[actualPosition-2] / numbers[actualPosition-1];
+            numbers[actualPosition-2] = result;
+            actualPosition = actualPosition-1;
+        }
+        else{
+            error = true;
+            errorMensaje = "Missing Operators";
+        }
+    };
+    
+    public void multiply(){
+        if (actualPosition >= 2){
+            double result = numbers[actualPosition-2] * numbers[actualPosition-1];
+            numbers[actualPosition-2] = result;
+            actualPosition = actualPosition-1;
+        }
+        else{
+            error = true;
+            errorMensaje = "Missing Operators";
+        }
+    };
 
     // public void changeOperator(){};
 
